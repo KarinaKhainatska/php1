@@ -1,0 +1,14 @@
+{
+    "name": "user/php",
+    "authors": [
+        {
+            "name": "KarinaKhainatska",
+            "email": "hajnackakarina@gmail.com"
+        }
+    ],
+    "require": {
+        "monolog/monolog": "*",
+        "symfony/var-dumper": "^7.3",
+        "fakerphp/faker": "^1.24"
+    }
+}
