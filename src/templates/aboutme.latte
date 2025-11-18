@@ -1,0 +1,12 @@
+<section class="aboutme" style="padding:2rem; text-align:center;">
+    <h1>{$title}</h1>
+    <p><strong>Ім’я:</strong> {$name}</p>
+    <p>{$description}</p>
+
+    <h3>Мої навички:</h3>
+    <ul style="list-style:none; padding:0;">
+        {foreach $skills as $skill}
+            <li>{$skill}</li>
+        {/foreach}
+    </ul>
+</section>
