@@ -1,91 +1,27 @@
 <?php
-abstract class User {
-    private $name;
-    private $email;
+declare(strict_types=1);
 
-    public function __construct($name, $email) {
-        $this->name = $name;
-        $this->email = $email;
-    }
+require __DIR__ . '/vendor/autoload.php';
 
- 
-    abstract public function getRole();
+use Monolog\Logger;
+use Monolog\Handler\StreamHandler;
+use Monolog\Level;
+use Symfony\Component\VarDumper\VarDumper;
+use Faker\Factory;
 
+$log = new Logger('app_logger');
 
-    public function getName() {
-        return $this->name;
-    }
+$log->pushHandler(new StreamHandler(__DIR__ . '/app.log', Level::Info));
+$log->log(Level::Info, 'Проєкт PHP з Composer успішно створено!');
 
-    public function setName($name) {
-        $this->name = $name;
-    }
+$data = [
+    'name' => 'Карина',
+    'age' => 20,
+    'skills' => ['PHP', 'JS']
+];
 
-    public function getEmail() {
-        return $this->email;
-    }
+VarDumper::dump($data);
 
-    public function setEmail($email) {
-        $this->email = $email;
-    }
-}
-
-
-class Student extends User {
-    private $group;
-
-    public function __construct($name, $email, $group) {
-        parent::__construct($name, $email);
-        $this->group = $group;
-    }
-
-    public function getRole() {
-        return "Студент";
-    }
-
-    public function getGroup() {
-        return $this->group;
-    }
-
-    public function setGroup($group) {
-        $this->group = $group;
-    }
-}
-
-
-class Teacher extends User {
-    private $subject;
-
-    public function __construct($name, $email, $subject) {
-        parent::__construct($name, $email);
-        $this->subject = $subject;
-    }
-
-    public function getRole() {
-        return "Викладач";
-    }
-
-    public function getSubject() {
-        return $this->subject;
-    }
-
-    public function setSubject($subject) {
-        $this->subject = $subject;
-    }
-}
-
-
-$student = new Student("Karyna Khainatska", "hajnackakarina@gmail.com", "CS-24");
-$teacher = new Teacher("Valentyna Kovalchuk", "valentyna.kovalchuk@gmil.com", "English");
-
-
-echo "Ім’я: " . $student->getName() . "<br>";
-echo "Email: " . $student->getEmail() . "<br>";
-echo "Роль: " . $student->getRole() . "<br>";
-echo "Група: " . $student->getGroup() . "<br><br>";
-
-echo "Ім’я: " . $teacher->getName() . "<br>";
-echo "Email: " . $teacher->getEmail() . "<br>";
-echo "Роль: " . $teacher->getRole() . "<br>";
-echo "Предмет: " . $teacher->getSubject() . "<br>";
-
-?>
+$faker = Factory::create();
+echo "Випадкове ім'я: " . $faker->name() . PHP_EOL;
+echo "Випадковий email: " . $faker->email() . PHP_EOL;
